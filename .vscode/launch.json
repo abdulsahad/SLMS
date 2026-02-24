@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/Ahad/Library/CloudStorage/OneDrive-BuckinghamshireNewUniversity/BSc Year 2/OOP Project/SLMS",
+      "program": "/Users/Ahad/Library/CloudStorage/OneDrive-BuckinghamshireNewUniversity/BSc Year 2/OOP Project/SLMS/build/Debug/outDebug"
+    }
+  ]
+}
