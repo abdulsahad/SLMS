@@ -1,9 +1,15 @@
 #include <iostream>
+#include <vector>
+#include "Book.h"
 using namespace std;
 
 int main() {
-    int choice;
+    vector<Book> books;
+    books.push_back(Book("1984", "George Orwell"));
 
+    cout << "Books initialized: " << books.size() << endl;
+
+    int choice;
     do {
         cout << "\n===== SMART LIBRARY MANAGEMENT SYSTEM =====\n";
         cout << "1. Member Login\n";
