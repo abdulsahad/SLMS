@@ -1,12 +1,18 @@
 #include <iostream>
 #include <vector>
 #include "Book.h"
+#include "Member.h"
 #include "User.h"
 using namespace std;
 
 int main() {
     vector<Book> books;
     books.push_back(Book("1984", "George Orwell"));
+
+    vector<User*> users;
+    users.push_back(new Member("member1", "mem123"));
+    users.push_back(new Member("member2", "mem123"));
+    users.push_back(new Member("member3", "mem123"));
 
     cout << "System initialized...\n";
 
