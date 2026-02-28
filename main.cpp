@@ -3,6 +3,7 @@
 #include "Book.h"
 #include "Member.h"
 #include "Admin.h"
+#include "Librarian.h"
 #include "User.h"
 using namespace std;
 
@@ -16,7 +17,8 @@ int main() {
     users.push_back(new Member("member2", "mem123"));
     users.push_back(new Member("member3", "mem123"));
     users.push_back(new Admin("admin1", "admin123"));
-    
+    users.push_back(new Librarian("librarian", "lib123"));
+
     cout << "System initialized...\n";
 
     int choice;
