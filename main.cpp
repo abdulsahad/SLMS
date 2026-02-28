@@ -2,6 +2,7 @@
 #include <vector>
 #include "Book.h"
 #include "Member.h"
+#include "Admin.h"
 #include "User.h"
 using namespace std;
 
@@ -10,10 +11,12 @@ int main() {
     books.push_back(Book("1984", "George Orwell"));
 
     vector<User*> users;
+    
     users.push_back(new Member("member1", "mem123"));
     users.push_back(new Member("member2", "mem123"));
     users.push_back(new Member("member3", "mem123"));
-
+    users.push_back(new Admin("admin1", "admin123"));
+    
     cout << "System initialized...\n";
 
     int choice;
