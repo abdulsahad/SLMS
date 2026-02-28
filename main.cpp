@@ -1,13 +1,14 @@
 #include <iostream>
 #include <vector>
 #include "Book.h"
+#include "User.h"
 using namespace std;
 
 int main() {
     vector<Book> books;
     books.push_back(Book("1984", "George Orwell"));
 
-    cout << "Books initialized: " << books.size() << endl;
+    cout << "System initialized...\n";
 
     int choice;
     do {
