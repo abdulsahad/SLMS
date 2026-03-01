@@ -5,6 +5,7 @@
 #include "Admin.h"
 #include "Librarian.h"
 #include "User.h"
+#include "Library.h"
 using namespace std;
 
 int main() {

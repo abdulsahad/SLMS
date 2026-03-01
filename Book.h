@@ -8,14 +8,25 @@ class Book {
 private:
     string title;
     string author;
-    string status;
+    string status;      
+    string borrower;
+    string reservedBy;
 
 public:
+    // Constructor
     Book(string t, string a);
-    string getTitle();
-    string getAuthor();
-    string getStatus();
+
+    // Getters
+    string getTitle() const;
+    string getAuthor() const;
+    string getStatus() const;
+    string getBorrower() const;
+    string getReservedBy() const;
+
+    // Setters
     void setStatus(string s);
+    void setBorrower(string b);
+    void setReservedBy(string r);
 };
 
 #endif
