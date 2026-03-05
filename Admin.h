@@ -3,6 +3,8 @@
 
 #include "User.h"
 
+class Library;
+
 class Admin : public User {
 public:
     Admin(string u, string p);

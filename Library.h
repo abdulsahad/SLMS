@@ -8,9 +8,12 @@ using namespace std;
 class Library {
 private:
     vector<Book> books;
+    int borrowLimit;
 
 public:
     Library();
+    void setBorrowLimit(int limit);
+    int getBorrowLimit() const;
 
     void addBook(Book book);
     void removeBook(string title);

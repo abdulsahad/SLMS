@@ -2,7 +2,7 @@
 #include "Library.h"
 using namespace std;
 
-Library::Library() {
+Library::Library() : borrowLimit(3) {
     books.push_back(Book("1984", "George Orwell"));
     books.push_back(Book("Dune", "Frank Herbert"));
     books.push_back(Book("Hamlet", "Shakespeare"));
@@ -13,6 +13,14 @@ Library::Library() {
     books.push_back(Book("It", "Stephen King"));
     books.push_back(Book("Sapiens", "Harari"));
     books.push_back(Book("Algorithms", "CLRS"));
+}
+
+void Library::setBorrowLimit(int limit) {
+    borrowLimit = limit;
+}
+
+int Library::getBorrowLimit() const {
+    return borrowLimit;
 }
 
 void Library::addBook(Book book) {
