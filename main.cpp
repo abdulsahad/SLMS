@@ -1,60 +1,96 @@
 #include <iostream>
-#include <vector>
 #include <string>
-#include <algorithm>
-#include "Book.h"
+#include <limits>
+#include "Library.h"
 #include "User.h"
 #include "Member.h"
 #include "Librarian.h"
 #include "Admin.h"
-#include "Library.h"
+#include "PasswordUtil.h"
 
 using namespace std;
 
 int main() {
-    vector<Book> books;
     Library library;
 
-    vector<User*> users;
-    users.push_back(new Admin("admin", "admin123"));
-    users.push_back(new Librarian("librarian", "lib123"));
-    users.push_back(new Member("member1", "mem123"));
-    users.push_back(new Member("member2", "mem123"));
-    users.push_back(new Member("member3", "mem123"));
+    // Create default admin and librarian accounts (passwords are XOR-encoded)
+    library.addUser(new Admin("admin",
+        PasswordUtil::encode("admin123"), "System Admin", "admin@slms.com"));
+    library.addUser(new Librarian("librarian",
+        PasswordUtil::encode("lib123"), "Head Librarian", "librarian@slms.com"));
 
-    cout << "System initialized...\n";
+    cout << "=============================================\n";
+    cout << "   SMART LIBRARY MANAGEMENT SYSTEM (SLMS)\n";
+    cout << "=============================================\n";
+    cout << "System initialised with 10 books in the catalogue.\n";
+    cout << "Default accounts: admin/admin123, librarian/lib123\n";
+    cout << "Members must sign up before logging in.\n\n";
 
     int choice;
-    string username, password;
+    string username, password, name, email;
 
     do {
-        cout << "\n===== SMART LIBRARY MANAGEMENT SYSTEM =====\n";
-        cout << "1. Login\n";
-        cout << "0. Exit\n";
-        cout << "Select option: ";
-        cin >> choice;
+        // Check for expired reservations each cycle
+        library.checkReservationExpiry();
 
-        if(choice == 1) {
+        cout << "\n===== MAIN MENU =====\n";
+        cout << "1. Login\n";
+        cout << "2. Sign Up (New Member)\n";
+        cout << "0. Exit\n";
+        cout << "Select: ";
+
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number.\n";
+            continue;
+        }
+        cin.ignore();
+
+        if (choice == 1) {
             cout << "Username: ";
-            cin >> username;
+            getline(cin, username);
             cout << "Password: ";
-            cin >> password;
+            getline(cin, password);
 
             bool found = false;
-            for(User* user : users) {
-                if(user->login(username, password)) {
-                    cout << "Login successful!\n";
-                    user->menu(library); 
-                    found = true; 
+            for (User* user : library.getUsers()) {
+                if (user->login(username, password)) {
+                    cout << "Login successful! Welcome, " << user->getName()
+                         << " [" << user->getRole() << "]\n";
+                    user->menu(library);
+                    found = true;
                     break;
                 }
             }
-            if(!found) {
-                cout << "Invalid credentials!\n";
+            if (!found) {
+                cout << "Invalid username or password!\n";
             }
         }
+        else if (choice == 2) {
+            cout << "\n--- New Member Registration ---\n";
+            cout << "Choose a username: ";
+            getline(cin, username);
 
-    } while(choice != 0);
+            if (library.findUser(username)) {
+                cout << "Username already taken! Try a different one.\n";
+                continue;
+            }
 
+            cout << "Choose a password: ";
+            getline(cin, password);
+            cout << "Your full name: ";
+            getline(cin, name);
+            cout << "Your email (for notifications): ";
+            getline(cin, email);
+
+            string encoded = PasswordUtil::encode(password);
+            library.addUser(new Member(username, encoded, name, email));
+            cout << "Registration successful! You can now log in.\n";
+        }
+
+    } while (choice != 0);
+
+    cout << "\nSystem shutdown. Goodbye!\n";
     return 0;
 }
