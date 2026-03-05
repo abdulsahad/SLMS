@@ -2,19 +2,23 @@
 #define MEMBER_H
 
 #include "User.h"
-#include "Library.h"
 #include <vector>
 #include <string>
 using namespace std;
 
+class Library;
+
 class Member : public User {
 private:
-    vector<string> borrowedBooks; 
-    static const int MAX_BORROW = 5;
+    vector<string> borrowedBooks;
 
 public:
-    Member(string u, string p);
-    void menu(Library &library);
+    Member(string u, string encodedPass, string n, string e);
+    void menu(Library &library) override;
+    int getBorrowedCount() const;
+    vector<string> getBorrowedBooks() const;
+    void addBorrowedBook(const string& title);
+    void removeBorrowedBook(const string& title);
 };
 
 #endif
