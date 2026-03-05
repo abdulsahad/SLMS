@@ -15,6 +15,19 @@ Library::Library() {
     books.push_back(Book("Algorithms", "CLRS"));
 }
 
+void Library::addBook(Book book) {
+    books.push_back(book);
+}
+
+void Library::removeBook(string title) {
+    for(auto it = books.begin(); it != books.end(); ++it) {
+        if(it->getTitle() == title) {
+            books.erase(it);
+            return;
+        }
+    }
+}
+
 void Library::searchBook(string keyword) {
     for(Book &b : books) {
         if(b.getTitle().find(keyword) != string::npos ||
@@ -42,4 +55,16 @@ void Library::returnBook(string title) {
             b.setBorrower("");
         }
     }
+}
+
+void Library::showOverdueReport() {
+    cout << "\n--- Overdue Report ---" << endl;
+    bool found = false;
+    for(Book &b : books) {
+        if(b.getStatus() == "Borrowed") {
+            cout << b.getTitle() << " - Borrowed by: " << b.getBorrower() << endl;
+            found = true;
+        }
+    }
+    if(!found) cout << "No borrowed books." << endl;
 }

@@ -12,9 +12,12 @@ private:
 public:
     Library();
 
+    void addBook(Book book);
+    void removeBook(string title);
     void searchBook(string keyword);
     bool borrowBook(string title, string user);
     void returnBook(string title);
+    void showOverdueReport();
 };
 
 #endif
