@@ -19,11 +19,9 @@ void Librarian::menu(Library &library) {
         cout << "3. Update Book\n";
         cout << "4. Search Book\n";
         cout << "5. View All Books\n";
-        cout << "6. Process Borrow Request\n";
-        cout << "7. Process Return\n";
-        cout << "8. View Reservations\n";
-        cout << "9. Generate Overdue Report\n";
-        cout << "10. Send Overdue Notifications\n";
+        cout << "6. View Reservations\n";
+        cout << "7. Generate Overdue Report\n";
+        cout << "8. Send Overdue Notifications\n";
         cout << "0. Logout\n";
         cout << "Select: ";
         cin >> choice;
@@ -54,51 +52,12 @@ void Librarian::menu(Library &library) {
             library.showAllBooks();
         }
         else if (choice == 6) {
-            cout << "Member username: "; getline(cin, input);
-            User* memberUser = library.findUser(input);
-            if (memberUser && memberUser->getRole() == "Member") {
-                Member* member = dynamic_cast<Member*>(memberUser);
-                if (member && member->getBorrowedCount() >= library.getBorrowLimit()) {
-                    cout << "Member has reached the borrow limit.\n";
-                } else {
-                    cout << "Book title: "; getline(cin, input2);
-                    if (library.borrowBook(input2, input)) {
-                        if (member) member->addBorrowedBook(input2);
-                        Book* book = library.findBook(input2);
-                        if (book)
-                            cout << "Borrow processed. Due: " << book->getDueDateString() << "\n";
-                    } else {
-                        cout << "Book not available for borrowing.\n";
-                    }
-                }
-            } else {
-                cout << "Member not found.\n";
-            }
-        }
-        else if (choice == 7) {
-            cout << "Member username: "; getline(cin, input);
-            User* memberUser = library.findUser(input);
-            if (memberUser && memberUser->getRole() == "Member") {
-                cout << "Book title: "; getline(cin, input2);
-                Member* member = dynamic_cast<Member*>(memberUser);
-                double penalty = library.returnBook(input2, input);
-                if (member) member->removeBorrowedBook(input2);
-                if (penalty > 0) {
-                    cout << "Return processed. Late penalty: $" << penalty << "\n";
-                } else {
-                    cout << "Return processed successfully.\n";
-                }
-            } else {
-                cout << "Member not found.\n";
-            }
-        }
-        else if (choice == 8) {
             library.showReservations();
         }
-        else if (choice == 9) {
+        else if (choice == 7) {
             library.showOverdueReport();
         }
-        else if (choice == 10) {
+        else if (choice == 8) {
             library.sendAllOverdueNotifications();
         }
 
