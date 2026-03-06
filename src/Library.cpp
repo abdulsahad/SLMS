@@ -148,7 +148,8 @@ double Library::returnBook(const string& title, const string& username) {
 
 bool Library::reserveBook(const string& title, const string& username) {
     for (Book& b : books) {
-        if (b.getTitle() == title && b.getStatus() == "Borrowed" && b.getReservedBy().empty()) {
+        if (b.getTitle() == title && b.getStatus() == "Borrowed"
+            && b.getReservedBy().empty() && b.getBorrower() != username) {
             b.setReservedBy(username);
             return true;
         }
