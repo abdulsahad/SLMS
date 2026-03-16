@@ -10,7 +10,6 @@ using namespace std;
 class Library;  // Forward declaration so we can use Library in the menu function
 
 // Admin inherits from User using "public User"
-// This means Admin gets all of User's members (username, name, etc)
 class Admin : public User {
 public:
     // This is the constructor that calls the User constructor and sets role to "Admin"

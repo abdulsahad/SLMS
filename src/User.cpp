@@ -7,9 +7,9 @@
 User::User(string u, string encodedPass, string n, string e, string r) {
     username = u;           // Store the username
     passwordHash = encodedPass;  // Store the ENCODED password (not plain text)
-    name = n;               // Store the user's full name
-    email = e;              // Store the user's email address
-    role = r;               // Store the role ("Admin", "Librarian", or "Member")
+    name = n;               
+    email = e;              
+    role = r;               
 }
 
 // Login function - checks if the entered username and password are correct

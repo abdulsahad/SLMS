@@ -5,8 +5,8 @@
 // to get the original password back.
 #include "PasswordUtil.h"
 #include <sstream>   
-#include <iomanip>   // For setfill and setw (formatting hex output)
-#include <cstdlib>   // For strtol (converting hex string to number)
+#include <iomanip>   
+#include <cstdlib>   
 
 // Anyone with this key and the encoded password can decode it
 const string PasswordUtil::SECRET_KEY = "SLMS_SecretKey_2026";
